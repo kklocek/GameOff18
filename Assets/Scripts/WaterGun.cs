@@ -32,7 +32,6 @@ public class WaterGun : MonoBehaviour {
 
     private void OnParticleCollision(GameObject other)
     {
-        Debug.Log("Particle collision: " + other);
         Flammable flammable = other.GetComponent<Flammable>();
         if(flammable)
         {
