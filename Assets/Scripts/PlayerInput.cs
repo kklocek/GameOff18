@@ -5,16 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Movement))]
 public class PlayerInput : MonoBehaviour {
 
+    [SerializeField]
+    private PlayerSight playerSight;
     private Movement movement;
     private WaterGun waterGun;
-    //TODO
-    private FireGun fireGun;
 
     private void Start()
     {
         movement = GetComponent<Movement>();
         waterGun = GetComponentInChildren<WaterGun>();
-        fireGun = GetComponentInChildren<FireGun>();
     }
 
     private void Update()
@@ -23,15 +22,13 @@ public class PlayerInput : MonoBehaviour {
         {
             movement.Jump();
         }
-        if(Input.GetKeyDown(KeyCode.V))
+        if(Input.GetButton("Fire1"))
         {
-            waterGun?.StartShooting();
-            fireGun?.StartShooting();
+            waterGun?.StartShooting(playerSight.transform.position);
         }
-        if(Input.GetKeyUp(KeyCode.V))
+        else if(Input.GetButtonUp("Fire1"))
         {
             waterGun?.StopShooting();
-            fireGun?.StopShooting();
         }
     }
 
@@ -40,8 +37,4 @@ public class PlayerInput : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         movement.MoveWithHorizontal(horizontal);
     }
-
-
-
-
 }

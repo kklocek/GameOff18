@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class Flammable : MonoBehaviour {
 
+    public bool IsBurning { get; private set; }
+    public bool IsBurned { get; private set; }
+
     [SerializeField]
     [Range(0f, 100f)]
     private float hp = 100f;
     [SerializeField]
     private float hpDropOrig = 5f;
-    [SerializeField]
-    private bool isBurning = false;
-    private bool isBurned = false;
     private float hpDrop = 5f;
     private SpriteRenderer spriteRenderer;
 
     public void Burn()
     {
-        if(isBurned)
+        if(IsBurned)
         {
             return;
         }
-        isBurning = true;
+        IsBurning = true;
     }
 
     public void Extinguish(float power)
     {
-        if(isBurning)
+        if(IsBurning)
         {
             hpDrop -= power * Time.deltaTime;
             if(hpDrop <= 0)
             {
-                isBurning = false;
+                IsBurning = false;
             }
         }
     }
@@ -44,17 +44,17 @@ public class Flammable : MonoBehaviour {
 
     private void Update()
     {
-        if(isBurned)
+        if(IsBurned)
         {
             return;
         }
-        if(isBurning)
+        if(IsBurning)
         {
             hp -= hpDrop * Time.deltaTime;
             if(hp <= 0)
             {
-                isBurned = true;
-                isBurning = false;
+                IsBurned = true;
+                IsBurning = false;
                 BurnMaterial();
             }
         }

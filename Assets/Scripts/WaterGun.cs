@@ -11,7 +11,22 @@ public class WaterGun : MonoBehaviour {
 
     public void StartShooting()
     {
-        if(!isShooting)
+        StartShooting(Vector2.zero);
+    }
+
+    public void StartShooting(Vector2 target)
+    {
+        //TODO
+        //rotate
+        transform.LookAt(target);
+        //Vector2 myPos = transform.position;
+        //Vector2 direction = (target - myPos).normalized;
+        //float cosAlfa = Vector2.Dot(direction, transform.right); //unit vectors
+        //float alfa = Mathf.Acos(cosAlfa) * Mathf.Rad2Deg;
+        //float y = transform.rotation.eulerAngles.y;
+        //transform.rotation = Quaternion.Euler(alfa, y, 0);
+        //Debug.Log(cosAlfa + " " + alfa + ", rotation y: " + y);
+        if (!isShooting)
         {
             waterParticles.Play();
             isShooting = true;
